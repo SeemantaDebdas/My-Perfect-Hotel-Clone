@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7413477153680986270}
   - component: {fileID: 5861211559827578200}
   - component: {fileID: 8779399180492503886}
+  - component: {fileID: 1588972074281541786}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -48,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Controller>k__BackingField: {fileID: 5861211559827578200}
   <Animator>k__BackingField: {fileID: 8779399180492503886}
+  <TouchInput>k__BackingField: {fileID: 0}
+  <MoveSpeed>k__BackingField: 5
+  <RotateSpeed>k__BackingField: 20
 --- !u!143 &5861211559827578200
 CharacterController:
   m_ObjectHideFlags: 0
@@ -95,3 +99,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1588972074281541786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671954262146640856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53acba2afde8d344c9b5dda3839730ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionSpeed: 2
