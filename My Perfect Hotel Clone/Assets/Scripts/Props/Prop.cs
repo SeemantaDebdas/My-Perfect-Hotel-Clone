@@ -28,6 +28,8 @@ public class Prop : MonoBehaviour
 
     public float TimeCleaned => interactable.InteractionTime;
     public float MaxCleanTime => interactable.MaxInteractionTime;
+    
+    public bool IsClean() => cleanProp.activeSelf;
 
     private void Interactable_OnInteractionEnded()
     {
