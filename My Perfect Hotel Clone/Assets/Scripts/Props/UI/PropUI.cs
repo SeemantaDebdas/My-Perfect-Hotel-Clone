@@ -20,5 +20,6 @@ public class PropUI : MonoBehaviour
     private void Prop_OnPropInteracted()
     {
         slider.value = prop.TimeCleaned / prop.MaxCleanTime;
+        print(slider.value);
     }
 }
