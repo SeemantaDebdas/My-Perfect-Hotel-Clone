@@ -19,7 +19,7 @@ public class InteractableUI : MonoBehaviour
         interactable.OnReset -= Interactable_OnReset;
     }
 
-    void Interactable_OnInteract()
+    void Interactable_OnInteract(Interactor _)
     {
         UpdateUI();
     }

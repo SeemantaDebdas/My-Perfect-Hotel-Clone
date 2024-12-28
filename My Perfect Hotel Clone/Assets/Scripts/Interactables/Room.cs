@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using RPG.Core;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
 
 public class Room : MonoBehaviour, IListValueSetter<Room>
 {
@@ -12,6 +12,11 @@ public class Room : MonoBehaviour, IListValueSetter<Room>
     [SerializeField] ScriptableList_Room availableRoomList;
     [SerializeField] List<Prop> propList;
     [SerializeField] private Transform restTransform = null, exitTransform = null;
+
+    [Space] 
+    [SerializeField] private UnityEvent onClean = null;
+    [SerializeField] private UnityEvent onDirty = null;
+    
     Guest guest = null;
     
     private void OnEnable()
@@ -50,6 +55,7 @@ public class Room : MonoBehaviour, IListValueSetter<Room>
         {
             prop.Dirty();
         }
+        onDirty?.Invoke();
     }
 
     public Transform GetRestTransform()
@@ -78,8 +84,11 @@ public class Room : MonoBehaviour, IListValueSetter<Room>
     
     void Prop_OnClean()
     {
-        if(IsClean())
+        if (IsClean())
+        {
             AddItem(this);
+            onClean?.Invoke();
+        }
     }
 
     #region IEnumberableValueSetter

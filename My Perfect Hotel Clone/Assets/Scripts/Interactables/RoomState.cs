@@ -12,10 +12,7 @@ public class RoomState : MonoBehaviour
 
     private void Awake()
     {
-        foreach (GameObject roomLevel in roomLevelList)
-        {
-            roomLevel.SetActive(false);
-        }
+        DisableAllRooms();
         
         if (lockedAtStart)
         {
@@ -28,6 +25,31 @@ public class RoomState : MonoBehaviour
             roomLevelList[currentStateIndex].SetActive(true);
         }
     }
-    
+
+    void DisableAllRooms()
+    {
+        foreach (GameObject roomLevel in roomLevelList)
+        {
+            roomLevel.SetActive(false);
+        }
+    }
+
+
+    public void UpgradeState()
+    {
+        DisableAllRooms();
+
+        if (lockedState.activeSelf)
+        {
+            lockedState.SetActive(false);
+            roomLevelList[currentStateIndex].SetActive(true);
+        }
+        else
+        {
+            roomLevelList[currentStateIndex].SetActive(false);
+            currentStateIndex++;
+            roomLevelList[currentStateIndex].SetActive(true);
+        }
+    }
     
 }

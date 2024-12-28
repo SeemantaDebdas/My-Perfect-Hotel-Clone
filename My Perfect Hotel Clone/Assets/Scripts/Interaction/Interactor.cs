@@ -10,6 +10,14 @@ public class Interactor : MonoBehaviour
         if (!other.TryGetComponent(out Interactable interactable)) 
             return;
         
-        interactable.Interact(interactionSpeed);
+        interactable.Interact(this, interactionSpeed);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.TryGetComponent(out Interactable interactable)) 
+            return;
+        
+        interactable.StopInteraction();
     }
 }

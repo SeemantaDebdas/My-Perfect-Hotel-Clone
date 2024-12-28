@@ -7,12 +7,15 @@ public class Interactable : MonoBehaviour
     [field: SerializeField] public float MaxInteractionTime { get; private set; } = 2f;
     [SerializeField] bool resetOnEnd = false;
     public float InteractionTime { get; private set; } = 0f;
-    
-    public event Action OnInteract, OnInteractionEnded, OnReset;
+
+    public event Action<Interactor> OnInteract;
+    public event Action OnInteractionEnded, OnReset, OnInteractionStop;
 
     private bool canInteract = true;
     
     public bool CanInteract() => canInteract;
+
+    Interactor interactor = null;
 
     public void EnableInteraction()
     {
@@ -26,7 +29,7 @@ public class Interactable : MonoBehaviour
         OnReset?.Invoke();
     }
 
-    public void Interact(float interactionSpeed)
+    public virtual void  Interact(Interactor interactor, float interactionSpeed)
     {
         if (canInteract == false)
             return;
@@ -44,6 +47,11 @@ public class Interactable : MonoBehaviour
             return;
         }
         
-        OnInteract?.Invoke();
+        OnInteract?.Invoke(interactor);
+    }
+
+    public virtual void StopInteraction()
+    {
+        OnInteractionStop?.Invoke();
     }
 }
