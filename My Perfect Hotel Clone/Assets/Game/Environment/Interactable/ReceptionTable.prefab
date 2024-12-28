@@ -97,7 +97,7 @@ PrefabInstance:
       addedObject: {fileID: 8463067030876396927}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 162110413975313464, guid: 78031e193e6c252499d6413b76f72872, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 8255555020612554973}
     - targetCorrespondingSourceObject: {fileID: 162110413975313464, guid: 78031e193e6c252499d6413b76f72872, type: 3}
       insertIndex: -1
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guestQueue: {fileID: 11400000, guid: d92967a076e00cd43bb6f1359c816e5b, type: 2}
+  availableRoomList: {fileID: 11400000, guid: 5575ca90c8d29a44dadb07bad6004f91, type: 2}
   spaceInQueue: 2
 --- !u!208 &7279354924349021963
 NavMeshObstacle:

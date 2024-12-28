@@ -10,16 +10,26 @@ public class InteractableUI : MonoBehaviour
     private void OnEnable()
     {
         interactable.OnInteract += Interactable_OnInteract;
+        interactable.OnReset += Interactable_OnReset;
     }
 
     private void OnDisable()
     {
         interactable.OnInteract -= Interactable_OnInteract;
+        interactable.OnReset -= Interactable_OnReset;
     }
 
-    private void Interactable_OnInteract()
+    void Interactable_OnInteract()
+    {
+        UpdateUI();
+    }
+    void Interactable_OnReset()
+    {
+        UpdateUI();    
+    }
+
+    void UpdateUI()
     {
         slider.value = interactable.InteractionTime / interactable.MaxInteractionTime;
-        //print(slider.value);
     }
 }

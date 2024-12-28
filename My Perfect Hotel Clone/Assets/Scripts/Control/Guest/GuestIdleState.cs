@@ -9,6 +9,7 @@ public class GuestIdleState : GuestBaseState
     public override void Enter()
     {
         base.Enter();
+        SM.Agent.ResetPath();
         SM.Animator.CrossFadeInFixedTime("Idle", 0.1f);
         
         SM.Guest.OnRoomAssigned += Guest_OnRoomAssigned;

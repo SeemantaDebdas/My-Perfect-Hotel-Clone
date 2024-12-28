@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wallpaper
+  m_Name: FloorMat2
   m_Shader: {fileID: 4800000, guid: a10c799d45c600643a165cdd9fdb287e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -64,11 +64,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Patern1Sprite:
-        m_Texture: {fileID: 2800000, guid: 9e52a434ca1aa294c929b5d47f04b9e1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 563d63171c47e9947881286867eb0532, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Patern2Sprite:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e955fb36295c959459832706b9ed779d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -121,7 +121,7 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _TilingPatern1: 0.75
+    - _TilingPatern1: 1
     - _TilingPatern2: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
@@ -130,7 +130,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Patern1Color: {r: 0.5283019, g: 0.28970477, b: 0.067283735, a: 0}
-    - _Patern2Color: {r: 0.6117647, g: 0.38039216, b: 0.61960787, a: 0}
+    - _Patern2Color: {r: 0.39607844, g: 0.23529412, b: 0.0627451, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

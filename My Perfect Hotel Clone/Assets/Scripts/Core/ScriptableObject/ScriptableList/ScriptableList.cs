@@ -13,6 +13,7 @@ namespace RPG.Core
     {
         public event Action<T> OnItemAdded, OnItemRemoved;
         public event Action OnListCleared;
+        public int Count => value.Count;
 
         private void OnEnable()
         {

@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+using System.Linq;
 using UnityEngine;
 
 public class Reception : MonoBehaviour
 {
-    private Guest lastGuest;
     [SerializeField] private ScriptableQueue_Guest guestQueue;
+    [SerializeField] private ScriptableList_Room availableRoomList;
+    [SerializeField] private float spaceInQueue = 0.5f;
 
     Interactable interactable;
-
-    [SerializeField] private float spaceInQueue = 0.5f;
-    public ObservableCollection<Room> RoomList { get; private set; } = new();
+    private Guest lastGuest;
 
     private void Awake()
     {
@@ -22,23 +20,31 @@ public class Reception : MonoBehaviour
     private void OnEnable()
     {
         interactable.OnInteractionEnded += Interactable_OnInteractionEnded;
-        RoomList.CollectionChanged += RoomList_CollectionChanged;
+        availableRoomList.OnItemAdded += RoomList_OnItemAdded;
 
         guestQueue.OnItemAdded += GuestQueue_OnItemAdded;
+        guestQueue.OnItemRemoved += GuestQueue_OnItemRemoved;
     }
 
     private void OnDisable()
     {
         interactable.OnInteractionEnded -= Interactable_OnInteractionEnded;
-        RoomList.CollectionChanged -= RoomList_CollectionChanged;
+        availableRoomList.OnItemAdded -= RoomList_OnItemAdded;
 
         guestQueue.OnItemAdded -= GuestQueue_OnItemAdded;
+        guestQueue.OnItemRemoved -= GuestQueue_OnItemRemoved;
     }
 
-    private void RoomList_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void RoomList_OnItemAdded(Room room)
     {
-        if (RoomList.Count == 0)
+        EvaluateIfReceptionIsInteractable();
+    }
+    
+    private void EvaluateIfReceptionIsInteractable()
+    {
+        if (availableRoomList.Count == 0)
         {
+            interactable.DisableInteraction();
             Debug.LogError("No rooms found");
             return;
         }
@@ -50,15 +56,16 @@ public class Reception : MonoBehaviour
         }
 
         interactable.EnableInteraction();
-        return;
     }
 
     public void AssignRoomToGuest()
     {
-        Guest guest = guestQueue.FirstElement;
+        Guest guest = guestQueue.GetAndRemoveFirstElement();
         Room availableRoom = GetAvailableRoom();
         guest.AssignRoom(availableRoom);
         availableRoom.AssignGuest(guest);
+        
+        EvaluateIfReceptionIsInteractable();
     }
 
     /// <summary>
@@ -68,9 +75,9 @@ public class Reception : MonoBehaviour
     /// <returns></returns>
     private Room GetAvailableRoom()
     {
-        print(RoomList.Count);
+        print(availableRoomList.Count);
         
-        foreach (Room room in RoomList)
+        foreach (Room room in availableRoomList.Value)
         {
             if (room.IsEmpty() && room.IsClean())
                 return room;
@@ -92,5 +99,17 @@ public class Reception : MonoBehaviour
         Vector3 startPosition = transform.position + transform.forward * spaceInQueue;
         int guestCount = guestQueue.Count;
         guest.AssignQueuePosition(startPosition + transform.forward * spaceInQueue * (guestCount - 1));
+    }
+    
+    void GuestQueue_OnItemRemoved()
+    {
+        List<Guest> remainingGuests = guestQueue.Value.ToList();
+        for (int i = 0; i < remainingGuests.Count; i++)
+        {
+            Vector3 startPosition = transform.position + transform.forward * spaceInQueue;
+            remainingGuests[i].AssignQueuePosition(startPosition + i * transform.forward * spaceInQueue);
+        }
+        
+        EvaluateIfReceptionIsInteractable();
     }
 }

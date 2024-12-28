@@ -59,13 +59,11 @@ public class Guest : MonoBehaviour, IQueueValueSetter<Guest>
         guestQueue.AddItem(item, this);
     }
 
+    public void RemoveItem(Guest item){}
+
     public void ClearEnumerable()
     {
         
-    }
-
-    public void RemoveItem()
-    {
     }
     
     #endregion

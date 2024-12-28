@@ -50,10 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dirtyProp: {fileID: 0}
   cleanProp: {fileID: 0}
-  onClean:
+  <OnClean>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4204676260554788741}
+      - m_Target: {fileID: 5016028905971845254}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -65,10 +65,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onDirty:
+  <OnDirty>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4204676260554788741}
+      - m_Target: {fileID: 5016028905971845254}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -92,7 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10860f56acdb78743a8c057432efe7d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxInteractionTime>k__BackingField: 2
+  <MaxInteractionTime>k__BackingField: 3
+  resetOnEnd: 1
 --- !u!65 &3775199837897600232
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -258,9 +259,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffff3bcb437675c4e89e94726ba01aa6, type: 3}
---- !u!1 &4204676260554788741 stripped
+--- !u!1 &5016028905971845254 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 689167486581954206, guid: ffff3bcb437675c4e89e94726ba01aa6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8527261688974447005, guid: ffff3bcb437675c4e89e94726ba01aa6, type: 3}
   m_PrefabInstance: {fileID: 3731910575690979611}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &8832964276654150682 stripped

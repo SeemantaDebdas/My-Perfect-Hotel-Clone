@@ -5,13 +5,19 @@ using UnityEngine.Events;
 public class Prop : MonoBehaviour
 {
     [SerializeField] private GameObject dirtyProp, cleanProp;
-    [SerializeField] private UnityEvent onClean, onDirty;
+    [field: SerializeField] public UnityEvent OnClean { get; private set; }
+    [field: SerializeField] public UnityEvent OnDirty { get; private set; }
 
     private Interactable interactable = null;
 
     private void Awake()
     {
         interactable = GetComponent<Interactable>();
+    }
+
+    private void Start()
+    {
+        Clean();
     }
 
     private void OnEnable()
@@ -35,15 +41,17 @@ public class Prop : MonoBehaviour
     {
         dirtyProp.SetActive(true);
         cleanProp.SetActive(false);
+        interactable.EnableInteraction();
         
-        onDirty.Invoke();
+        OnDirty.Invoke();
     }
 
-    public void Clean()
+    void Clean()
     {
         dirtyProp.SetActive(false);
         cleanProp.SetActive(true);
+        interactable.DisableInteraction();
         
-        onClean.Invoke();
+        OnClean.Invoke();
     }
 }

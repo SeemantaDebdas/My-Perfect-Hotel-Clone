@@ -7,9 +7,9 @@ public class Interactor : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (other.TryGetComponent(out Interactable interactable))
-        {
-            interactable.Interact(interactionSpeed);
-        }
+        if (!other.TryGetComponent(out Interactable interactable)) 
+            return;
+        
+        interactable.Interact(interactionSpeed);
     }
 }

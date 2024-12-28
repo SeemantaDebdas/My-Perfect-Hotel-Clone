@@ -14,6 +14,20 @@ public class GuestMoveState : GuestBaseState
     {
         base.Enter();
         SM.Animator.CrossFadeInFixedTime("Move", 0.1f);
+        
+        SM.Guest.OnQueuePositionSet += Guest_OnQueuePositionSet;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        SM.Guest.OnQueuePositionSet -= Guest_OnQueuePositionSet;
+    }
+
+    void Guest_OnQueuePositionSet(Vector3 destination)
+    {
+        SM.SwitchState(new GuestMoveState(SM, destination));
     }
 
     public override void Tick()

@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e6e7554ea58644ca5d729a2e26e43d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reception: {fileID: 0}
+  availableRoomList: {fileID: 11400000, guid: 5575ca90c8d29a44dadb07bad6004f91, type: 2}
   propList:
   - {fileID: 1444600883008204238}
   - {fileID: 7541882799069386180}

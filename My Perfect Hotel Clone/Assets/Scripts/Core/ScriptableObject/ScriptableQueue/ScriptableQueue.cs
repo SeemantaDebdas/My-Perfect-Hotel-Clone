@@ -6,7 +6,6 @@ namespace RPG.Core
 {
     public interface IQueueValueSetter<T> : IEnumerableValueSetter<T>
     {
-        void RemoveItem();
     }
 
     //probably have a base state for IEnumerables. list, queue, stack...
@@ -16,7 +15,13 @@ namespace RPG.Core
         public event Action OnListCleared, OnItemRemoved;
         public int Count => value.Count;
 
-        public T FirstElement => value.Dequeue();
+        public T GetAndRemoveFirstElement()
+        {
+            T returnValue = value.Dequeue();
+            OnItemRemoved?.Invoke();
+            
+            return returnValue;
+        }
 
         private void OnEnable()
         {
