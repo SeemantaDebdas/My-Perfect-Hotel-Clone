@@ -8,6 +8,7 @@ public class Reception : MonoBehaviour
     [SerializeField] private ScriptableQueue_Guest guestQueue;
     [SerializeField] private ScriptableList_Room availableRoomList;
     [SerializeField] private float spaceInQueue = 0.5f;
+    [SerializeField] private CashStacker cashStacker;
 
     Interactable interactable;
     private Guest lastGuest;
@@ -64,6 +65,8 @@ public class Reception : MonoBehaviour
         Room availableRoom = GetAvailableRoom();
         guest.AssignRoom(availableRoom);
         availableRoom.AssignGuest(guest);
+        
+        cashStacker.AddCashToStack();
         
         EvaluateIfReceptionIsInteractable();
     }

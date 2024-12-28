@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MPH.Data
 {
-    public class Purse : MonoBehaviour
+    public class Purse : MonoBehaviour, ICashCollector
     {
         [SerializeField] private int initialAmount = 10;
         public int CurrentAmount { get; private set; } 
@@ -21,6 +21,11 @@ namespace MPH.Data
         public void Credit(int amount)
         {
             CurrentAmount += amount;
+        }
+
+        public void CollectCash(int amount)
+        {
+            Credit(amount);
         }
     }
 }
