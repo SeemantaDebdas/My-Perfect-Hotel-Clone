@@ -23,7 +23,7 @@ public class Interactor : MonoBehaviour
         if (!other.TryGetComponent(out Interactable interactable)) 
             return;
         
-        print("Interacting with: " + interactable.name);
+        //print("Interacting with: " + interactable.name);
 
         interactable.OnDisabled -= Interactable_OnDisabled;
         interactable.OnDisabled += Interactable_OnDisabled;

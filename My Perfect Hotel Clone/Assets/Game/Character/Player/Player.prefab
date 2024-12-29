@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8779399180492503886}
   - component: {fileID: 1588972074281541786}
   - component: {fileID: 9029776143276334298}
+  - component: {fileID: 5419120042072667880}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -126,3 +127,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialAmount: 100
+--- !u!114 &5419120042072667880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671954262146640856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e4b0c1a30ea94428c60c108cc2aae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cashUnitPrefab: {fileID: 1716380359179543181, guid: 89032848d66cfc04ea1e388f6cc369b8, type: 3}
+  travelDuration: 1
+  arcHeight: 2
+  timeBetweenTravels: 0.5
