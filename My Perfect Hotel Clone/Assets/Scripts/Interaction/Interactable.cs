@@ -58,7 +58,7 @@ public class Interactable : MonoBehaviour
 
     private void OnDisable()
     {
-        print("Disabled Interactable");
+        //print("Disabled Interactable");
         OnDisabled?.Invoke(this);
     }
 }

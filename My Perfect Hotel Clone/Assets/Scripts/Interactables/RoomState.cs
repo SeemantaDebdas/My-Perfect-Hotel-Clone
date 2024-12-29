@@ -1,14 +1,16 @@
 using System;
 using System.Collections.Generic;
+using MPH.Saving;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
-public class RoomState : MonoBehaviour
+public class RoomState : MonoBehaviour, ISaveable
 {
     [SerializeField] private bool lockedAtStart = true;
     [SerializeField] private GameObject lockedState = null;
 
     [SerializeField] private List<GameObject> roomLevelList = null;
-    private int currentStateIndex = 0;
+    private int currentStateIndex = -1;
 
     private void Awake()
     {
@@ -22,12 +24,13 @@ public class RoomState : MonoBehaviour
         else
         {
             lockedState.SetActive(false);
-            roomLevelList[currentStateIndex].SetActive(true);
+            roomLevelList[++currentStateIndex].SetActive(true);
         }
     }
 
     void DisableAllRooms()
     {
+        lockedState.SetActive(false);
         foreach (GameObject roomLevel in roomLevelList)
         {
             roomLevel.SetActive(false);
@@ -39,17 +42,27 @@ public class RoomState : MonoBehaviour
     {
         DisableAllRooms();
 
-        if (lockedState.activeSelf)
+        roomLevelList[++currentStateIndex].SetActive(true);
+    }
+
+    public JToken CaptureAsJToken()
+    {
+        return JToken.FromObject(currentStateIndex);
+    }
+
+    public void RestoreFromJToken(JToken state)
+    {
+        currentStateIndex = state.ToObject<int>();
+        
+        DisableAllRooms();
+
+        if (currentStateIndex == -1)
         {
             lockedState.SetActive(false);
-            roomLevelList[currentStateIndex].SetActive(true);
         }
         else
         {
-            roomLevelList[currentStateIndex].SetActive(false);
-            currentStateIndex++;
             roomLevelList[currentStateIndex].SetActive(true);
         }
     }
-    
 }

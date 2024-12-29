@@ -26,7 +26,7 @@ public class GuestMoveState : GuestBaseState
 
         if (Vector3.Distance(SM.Guest.transform.position, destination) < 0.1f)
         {
-            Debug.Log("Destination Reached");
+            //Debug.Log("Destination Reached");
             if (SM.Guest.Room == null)
             {
                 SM.SwitchState(new GuestIdleState(SM));
