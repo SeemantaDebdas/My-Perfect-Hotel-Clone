@@ -27,6 +27,7 @@ public class GuestMoveState : GuestBaseState
 
     void Guest_OnQueuePositionSet(Vector3 destination)
     {
+        Debug.Log("Queue position set. Should change state");
         SM.SwitchState(new GuestMoveState(SM, destination));
     }
 

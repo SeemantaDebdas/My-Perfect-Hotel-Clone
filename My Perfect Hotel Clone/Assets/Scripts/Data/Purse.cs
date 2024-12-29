@@ -27,5 +27,7 @@ namespace MPH.Data
         {
             Credit(amount);
         }
+
+        public int RequiredCash(){return CurrentAmount;}
     }
 }

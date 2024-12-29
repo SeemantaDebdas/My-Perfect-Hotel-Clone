@@ -46,7 +46,7 @@ public class Reception : MonoBehaviour
         if (availableRoomList.Count == 0)
         {
             interactable.DisableInteraction();
-            Debug.LogError("No rooms found");
+            //Debug.LogError("No rooms found");
             return;
         }
 
@@ -64,7 +64,7 @@ public class Reception : MonoBehaviour
         Guest guest = guestQueue.GetAndRemoveFirstElement();
         Room availableRoom = GetAvailableRoom();
         guest.AssignRoom(availableRoom);
-        availableRoom.AssignGuest(guest);
+        availableRoom.SetAsOccupied();
         
         cashStacker.AddCashToStack();
         

@@ -10,6 +10,7 @@ public class Interactable : MonoBehaviour
 
     public event Action<Interactor> OnInteract;
     public event Action OnInteractionEnded, OnReset, OnInteractionStop;
+    public event Action<Interactable> OnDisabled;
 
     private bool canInteract = true;
     
@@ -53,5 +54,11 @@ public class Interactable : MonoBehaviour
     public virtual void StopInteraction()
     {
         OnInteractionStop?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        print("Disabled Interactable");
+        OnDisabled?.Invoke(this);
     }
 }

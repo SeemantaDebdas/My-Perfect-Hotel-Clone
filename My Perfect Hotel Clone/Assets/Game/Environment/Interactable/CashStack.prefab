@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CashStack
       objectReference: {fileID: 0}
+    - target: {fileID: 3775199837897600232, guid: 78031e193e6c252499d6413b76f72872, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3775199837897600232, guid: 78031e193e6c252499d6413b76f72872, type: 3}
+      propertyPath: m_Size.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5915679608032856196, guid: 78031e193e6c252499d6413b76f72872, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -54,7 +62,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8977879753390870416, guid: 78031e193e6c252499d6413b76f72872, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5016028905971845254, guid: 78031e193e6c252499d6413b76f72872, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 162110413975313464, guid: 78031e193e6c252499d6413b76f72872, type: 3}
@@ -83,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cashPrefab: {fileID: 7345884363105827338, guid: 89032848d66cfc04ea1e388f6cc369b8, type: 3}
   stackStartPositionOffset: {x: 0, y: 0, z: 0}
-  unitSize: {x: 1, y: 0.2, z: 1}
+  unitSize: {x: 0.3, y: 0.3, z: 0.3}
   stackWidth: 5
   stackHeight: 10
   stackDepth: 5
@@ -99,5 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e4b0c1a30ea94428c60c108cc2aae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cashUnitPrefab: {fileID: 0}
   travelDuration: 0.5
   arcHeight: 2
+  timeBetweenTravels: 1

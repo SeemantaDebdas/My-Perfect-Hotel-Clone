@@ -1,7 +1,6 @@
 using System;
 using RPG.Core;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Guest : MonoBehaviour, IQueueValueSetter<Guest>
 {
@@ -10,7 +9,6 @@ public class Guest : MonoBehaviour, IQueueValueSetter<Guest>
     public Room Room { get; private set; }
     public event Action<Room> OnRoomAssigned;
     public event Action<Vector3> OnQueuePositionSet;
-    public bool HasVisited { get; private set; } = false;
 
     private Vector3 queuePosition = Vector3.zero;
 
@@ -34,9 +32,9 @@ public class Guest : MonoBehaviour, IQueueValueSetter<Guest>
 
     public void UnassignRoom()
     {
-        Room.UnassignGuest();
+        Room.SetAsEmpty();
         Room = null;
-        HasVisited = true;
+        AddItem(this);
     }
 
     public void AssignQueuePosition(Vector3 position)
@@ -45,8 +43,6 @@ public class Guest : MonoBehaviour, IQueueValueSetter<Guest>
         queuePosition = position;
         OnQueuePositionSet?.Invoke(queuePosition);
     }
-    
-    public Vector3 GetQueuePosition() => queuePosition;
     
     #region IQueueValueSetter
 

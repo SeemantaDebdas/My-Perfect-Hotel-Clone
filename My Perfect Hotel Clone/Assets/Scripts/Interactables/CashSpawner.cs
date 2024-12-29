@@ -15,6 +15,7 @@ public class CashSpawner : MonoBehaviour
     private Purse purse;
     
     private Coroutine cashSpawnerCoroutine;
+    ICashCollector cashCollector;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class CashSpawner : MonoBehaviour
         if (interactor == null)
             return;
 
-        interactor.OnInteract += Interactor_OnInteract;
+        interactor.OnInteractionStarted += Interactor_OnInteractionStarted;
         interactor.OnInteractionEnded += Interactor_OnInteractionEnded;
     }
     
@@ -36,45 +37,47 @@ public class CashSpawner : MonoBehaviour
         if (interactor == null)
             return;
 
-        interactor.OnInteract -= Interactor_OnInteract;
+        interactor.OnInteract -= Interactor_OnInteractionStarted;
         interactor.OnInteractionEnded -= Interactor_OnInteractionEnded;
     }
 
 
-    private void Interactor_OnInteract(Interactable interactable)
+    private void Interactor_OnInteractionStarted(Interactable interactable)
     {
+        Debug.Log("Interactor_OnInteract called");
         if (interactable.TryGetComponent(out ICashCollector cashCollector))
         {
-            print("I cash Collector found: " + interactable.name);
             if (cashSpawnerCoroutine == null)
             {
-                cashSpawnerCoroutine = StartCoroutine(SendCashToDestinationOverTime(interactable.transform.position));
+                cashSpawnerCoroutine = StartCoroutine(SendCashToDestinationOverTime(cashCollector, interactable.transform.position));
             }
         }
     }
-    
+
     private void Interactor_OnInteractionEnded(Interactable interactable)
     {
-        if (!interactable.TryGetComponent(out ICashCollector cashCollector))
-            return;
-        
-        if (cashSpawnerCoroutine == null)
-            return;
-        
-        StopCoroutine(cashSpawnerCoroutine);
-        cashSpawnerCoroutine = null;
+        Debug.Log("Interactor_OnInteractionEnded called");
+        if (cashSpawnerCoroutine != null)
+        {
+            StopAllCoroutines();
+            Debug.Log("All coroutines stopped");
+            cashSpawnerCoroutine = null;
+        }
     }
     
-    private IEnumerator SendCashToDestinationOverTime(Vector3 destination)
+    private IEnumerator SendCashToDestinationOverTime(ICashCollector cashCollector, Vector3 destination)
     {
-        while (purse.CurrentAmount > 0)
+        int turns = (int)Mathf.Ceil((float)cashCollector.RequiredCash() / cashUnitPrefab.CashValue);
+        print($"Turns: {turns}, Cash Req: {cashCollector.RequiredCash()}/Cash Val: {cashUnitPrefab.CashValue}");
+        while (purse.CurrentAmount > 0 && turns > 0)
         {
-            print("Sending cash");
             purse.Debit(cashUnitPrefab.CashValue);
             SendCashToDestination(Instantiate(cashUnitPrefab, transform.position + Vector3.up * 2f, Quaternion.identity), destination);
-            yield return new WaitForSeconds(timeBetweenTravels); 
+            turns--;
+            
+            yield return new WaitForSeconds(timeBetweenTravels);
         }
-
+        Debug.Log("Coroutine ended");
         cashSpawnerCoroutine = null;
     }
 

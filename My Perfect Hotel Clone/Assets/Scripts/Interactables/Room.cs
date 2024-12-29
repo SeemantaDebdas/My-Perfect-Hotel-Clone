@@ -16,8 +16,10 @@ public class Room : MonoBehaviour, IListValueSetter<Room>
     [Space] 
     [SerializeField] private UnityEvent onClean = null;
     [SerializeField] private UnityEvent onDirty = null;
+    [SerializeField] private UnityEvent onEmpty = null;
+
+    private bool isEmpty = true;
     
-    Guest guest = null;
     
     private void OnEnable()
     {
@@ -40,17 +42,19 @@ public class Room : MonoBehaviour, IListValueSetter<Room>
     }
 
 
-    public bool IsEmpty() => guest == null;
+    public bool IsEmpty() => isEmpty;
     
-    public void AssignGuest(Guest guest)
+    public void SetAsOccupied()
     {
         RemoveItem(this);
-        this.guest = guest;
+        isEmpty = false;
     }
 
-    public void UnassignGuest()
+    public void SetAsEmpty()
     {
-        guest = null;
+        isEmpty = true;
+        onEmpty.Invoke();
+        
         foreach (Prop prop in propList)
         {
             prop.Dirty();
@@ -74,7 +78,7 @@ public class Room : MonoBehaviour, IListValueSetter<Room>
         {
             if (!prop.IsClean())
             {
-                print(prop.name);
+                //print(prop.name);
                 return false;
             }
         }

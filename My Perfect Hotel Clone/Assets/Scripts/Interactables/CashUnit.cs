@@ -69,7 +69,7 @@ public class CashUnit : MonoBehaviour
     {
         if (other.TryGetComponent(out ICashCollector cashCollector))
         {
-            print("Reached");
+            //print("Reached");
             cashCollector.CollectCash(CashValue);
             Destroy(gameObject);
         }

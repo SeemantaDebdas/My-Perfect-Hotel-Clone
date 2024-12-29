@@ -32,4 +32,9 @@ public class UpgradeStation : Interactable, ICashCollector
         
         OnAmountChanged?.Invoke();
     }
+
+    public int RequiredCash()
+    {
+        return CurrentUpgradeAmount;
+    }
 }
