@@ -1,4 +1,4 @@
-﻿namespace RPG.Core
+﻿namespace MPH.Core
 {
     public interface IEnumerableValueSetter<T> : IValueSetter<T>
     {

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace RPG.Core
+namespace MPH.Core
 {
     public interface IValueSetter<T>
     {

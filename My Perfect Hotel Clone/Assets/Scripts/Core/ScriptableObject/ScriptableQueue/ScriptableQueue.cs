@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Core
+namespace MPH.Core
 {
     public interface IQueueValueSetter<T> : IEnumerableValueSetter<T>
     {
@@ -70,6 +70,22 @@ namespace RPG.Core
             {
                 Debug.LogWarning($"{caller.name} is not authorized to modify this list!");
             }
+        }
+        
+        /// <summary>
+        /// Sorts the queue using a comparator function.
+        /// </summary>
+        /// <param name="comparator">The function used to compare two elements.</param>
+        public void Sort(Comparison<T> comparator)
+        {
+            // Convert the queue to a list
+            List<T> list = new List<T>(value);
+
+            // Sort the list using the provided comparator
+            list.Sort(comparator);
+
+            // Recreate the queue from the sorted list
+            value = new Queue<T>(list);
         }
     }
 }

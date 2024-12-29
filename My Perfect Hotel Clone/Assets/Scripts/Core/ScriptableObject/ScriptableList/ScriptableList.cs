@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Core
+namespace MPH.Core
 {
     public interface IListValueSetter<T> : IEnumerableValueSetter<T>
     {

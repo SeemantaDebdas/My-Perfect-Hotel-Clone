@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RPG.Core
+namespace MPH.Core
 {
     [CreateAssetMenu(fileName = "NewStringVariable", menuName = "Variables/String")]
     public class ScriptableString : ScriptableVariable<string>{}

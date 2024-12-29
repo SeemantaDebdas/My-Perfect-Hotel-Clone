@@ -27,6 +27,12 @@ public class Reception : MonoBehaviour
         guestQueue.OnItemRemoved += GuestQueue_OnItemRemoved;
     }
 
+    private void Start()
+    {
+        //assign position and re-evaluate interaction state
+        AssignPositionsToGuestsInQueue();
+    }
+
     private void OnDisable()
     {
         interactable.OnInteractionEnded -= Interactable_OnInteractionEnded;
@@ -101,18 +107,37 @@ public class Reception : MonoBehaviour
         //Assign position to guest
         Vector3 startPosition = transform.position + transform.forward * spaceInQueue;
         int guestCount = guestQueue.Count;
-        guest.AssignQueuePosition(startPosition + transform.forward * spaceInQueue * (guestCount - 1));
+        guest.AssignQueuePosition(startPosition + transform.forward * spaceInQueue * (guestCount - 1), transform);
     }
     
     void GuestQueue_OnItemRemoved()
     {
-        List<Guest> remainingGuests = guestQueue.Value.ToList();
-        for (int i = 0; i < remainingGuests.Count; i++)
-        {
-            Vector3 startPosition = transform.position + transform.forward * spaceInQueue;
-            remainingGuests[i].AssignQueuePosition(startPosition + i * transform.forward * spaceInQueue);
-        }
+        AssignPositionsToGuestsInQueue();
         
         EvaluateIfReceptionIsInteractable();
     }
+
+    private void AssignPositionsToGuestsInQueue()
+    {
+        Comparison<Guest> comparator = (guest1, guest2) =>
+        {
+            Vector3 position = transform.position;
+            float distance1 = Vector3.Distance(guest1.transform.position, position);
+            float distance2 = Vector3.Distance(guest2.transform.position, position);
+
+            return distance1.CompareTo(distance2);
+        };
+        
+        guestQueue.Sort(comparator);
+        
+        List<Guest> remainingGuests= guestQueue.Value.ToList();
+
+        for (int i = 0; i < remainingGuests.Count; i++)
+        {
+            Vector3 startPosition = transform.position + transform.forward * spaceInQueue;
+            remainingGuests[i].AssignQueuePosition(startPosition + i * transform.forward * spaceInQueue, transform);
+        }
+    }
+    
+
 }

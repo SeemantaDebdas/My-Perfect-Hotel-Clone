@@ -1,4 +1,4 @@
-using RPG.Core;
+using MPH.Core;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Scriptable Room List", menuName = "Variables/List/Room List")]

@@ -29,8 +29,8 @@ public class GuestIdleState : GuestBaseState
         SM.Guest.OnQueuePositionSet -= Guest_OnQueuePositionSet;
     }
 
-    private void Guest_OnQueuePositionSet(Vector3 destination)
+    private void Guest_OnQueuePositionSet(Vector3 destination, Transform caller)
     {
-        SM.SwitchState(new GuestMoveState(SM, destination));
+        SM.SwitchState(new GuestMoveState(SM, destination, caller));
     }
 }

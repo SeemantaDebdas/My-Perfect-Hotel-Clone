@@ -1,5 +1,5 @@
 using System;
-using RPG.Core;
+using MPH.Core;
 using UnityEngine;
 
 public class Guest : MonoBehaviour, IQueueValueSetter<Guest>
@@ -8,11 +8,11 @@ public class Guest : MonoBehaviour, IQueueValueSetter<Guest>
     [field: SerializeField] public Transform ExitTransform { get; private set; }
     public Room Room { get; private set; }
     public event Action<Room> OnRoomAssigned;
-    public event Action<Vector3> OnQueuePositionSet;
+    public event Action<Vector3, Transform> OnQueuePositionSet;
 
     private Vector3 queuePosition = Vector3.zero;
 
-    private void Start()
+    private void Awake()
     {
         AddItem(this);
     }
@@ -37,11 +37,11 @@ public class Guest : MonoBehaviour, IQueueValueSetter<Guest>
         AddItem(this);
     }
 
-    public void AssignQueuePosition(Vector3 position)
+    public void AssignQueuePosition(Vector3 position, Transform caller = null)
     {
-        Debug.Log("Queue Position set");
+        //Debug.Log("Queue Position set");
         queuePosition = position;
-        OnQueuePositionSet?.Invoke(queuePosition);
+        OnQueuePositionSet?.Invoke(queuePosition, caller);
     }
     
     #region IQueueValueSetter
